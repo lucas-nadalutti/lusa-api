@@ -1,8 +1,21 @@
 package lusa.api
 
-class ProductController {
 
+import grails.rest.*
+import grails.converters.*
+
+class ProductController {
+	static responseFormats = ['json', 'xml']
+	
     def index() {
-    	render Product.list() as grails.converters.JSON
+    	respond Product.list()
+    }
+
+    def save() {
+    	def product = new Product(request.JSON)
+    	if (!product.save()) {
+    		return render(status:400, text:product.errors.fieldErrors as JSON)
+    	}
+    	respond product
     }
 }

@@ -1,8 +1,5 @@
 package lusa.api
 
-import grails.rest.*
-
-@Resource(uri='/products', formats=['json'])
 class Product {
 
 	enum ProductStatus {
@@ -12,17 +9,17 @@ class Product {
 	String name
 	String description
 	ProductStatus status
-	double fullPrice
-	double currentPrice
+	Double fullPrice
+	Double currentPrice
 	String imageUrl
 	Date dateCreated
 	Date lastUpdated	
 
     static constraints = {
-    	name nullable:false, maxSize:128
+    	name nullable:false, maxSize:128, unique:['imageUrl']
     	description nullable:false
     	status nullable:false
     	fullPrice nullable:false, min:0d
-    	currentPrice min:0d
+    	currentPrice nullable:true, min:0d
     }
 }
