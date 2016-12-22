@@ -1,0 +1,7 @@
+import lusa.api.CreditCardCheckout
+
+model {
+	CreditCardCheckout creditCardCheckout
+}
+
+json tmpl.creditCardCheckout(creditCardCheckout)

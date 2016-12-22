@@ -8,6 +8,16 @@ grails:
             proxies: false
     cors:
         enabled: true
+    mail:
+        host: "smtp.gmail.com"
+        port: 465
+        username: "lucasnadalutti@gmail.com"
+        password: ""
+        props:
+            mail.smtp.auth: "true"
+            mail.smtp.socketFactory.port: "465"
+            mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
+            mail.smtp.socketFactory.fallback: "false"
 info:
     app:
         name: '@info.app.name@'
@@ -86,7 +96,7 @@ environments:
     test:
         dataSource:
             dbCreate: update
-            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            url: jdbc:mysql://localhost/lusa
     production:
         dataSource:
             dbCreate: none

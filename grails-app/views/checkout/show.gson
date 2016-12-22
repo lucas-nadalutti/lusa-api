@@ -1,0 +1,7 @@
+import lusa.api.Checkout
+
+model {
+	Checkout checkout
+}
+
+json tmpl.checkout(checkout)

@@ -1,0 +1,8 @@
+import lusa.api.CreditCardCheckout
+
+model {
+	Iterable<CreditCardCheckout> creditCardCheckoutList
+}
+
+json tmpl.creditCardCheckout(creditCardCheckoutList ?: [])
+

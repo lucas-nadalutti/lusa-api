@@ -1,0 +1,8 @@
+import lusa.api.InvoiceCheckout
+
+model {
+	Iterable<InvoiceCheckout> invoiceCheckoutList
+}
+
+json tmpl.invoiceCheckout(invoiceCheckoutList ?: [])
+

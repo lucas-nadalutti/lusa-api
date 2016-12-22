@@ -1,0 +1,7 @@
+import lusa.api.InvoiceCheckout
+
+model {
+	InvoiceCheckout invoiceCheckout
+}
+
+json tmpl.invoiceCheckout(invoiceCheckout)

@@ -9,17 +9,25 @@ class Product {
 	String name
 	String description
 	ProductStatus status
+	Integer quantity
 	Double fullPrice
 	Double currentPrice
 	String imageUrl
 	Date dateCreated
-	Date lastUpdated	
+	Date lastUpdated
+
+	static hasMany = [checkouts: Checkout]
+
+	static transients = ['price']
 
     static constraints = {
-    	name nullable:false, maxSize:128, unique:['imageUrl']
-    	description nullable:false
-    	status nullable:false
-    	fullPrice nullable:false, min:0d
+    	name maxSize:128, unique:['imageUrl']
+    	quantity min:0
+    	fullPrice min:0d
     	currentPrice nullable:true, min:0d
     }
+
+	Double getPrice() {
+		currentPrice ? currentPrice : fullPrice
+	}
 }

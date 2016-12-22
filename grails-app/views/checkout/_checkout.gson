@@ -1,0 +1,11 @@
+import lusa.api.Checkout
+
+model {
+	Checkout checkout
+}
+
+json g.render(checkout, [excludes:['product']]) {
+	product tmpl.'/product/product'(checkout.product)
+	invoiceCheckout tmpl.'/invoiceCheckout/invoiceCheckout'(checkout.invoiceCheckout)
+	creditCardCheckout tmpl.'/creditCardCheckout/creditCardCheckout'(checkout.creditCardCheckout)
+}

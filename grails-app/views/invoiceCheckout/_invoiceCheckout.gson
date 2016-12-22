@@ -1,0 +1,7 @@
+import lusa.api.InvoiceCheckout
+
+model {
+	InvoiceCheckout invoiceCheckout
+}
+
+json g.render(invoiceCheckout, [excludes:['checkout']])
