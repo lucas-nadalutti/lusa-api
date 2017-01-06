@@ -18,6 +18,14 @@ grails:
             mail.smtp.socketFactory.port: "465"
             mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
             mail.smtp.socketFactory.fallback: "false"
+    plugin:
+        springsecurity:
+            providerNames:
+                - lusaAuthProvider
+            rest:
+                # token.storage.jwt.expiration: 86400
+                token.storage.jwt.expiration: 1
+                login.endpointUrl: "/login"
 info:
     app:
         name: '@info.app.name@'

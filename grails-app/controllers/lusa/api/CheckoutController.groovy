@@ -3,24 +3,28 @@ package lusa.api
 
 import grails.rest.*
 import grails.converters.*
+import org.springframework.security.access.annotation.Secured
 
 class CheckoutController {
 	static responseFormats = ['json', 'xml']
 	
     def checkoutService
     
+    @Secured(['ROLE_ADMIN'])
     def index() {
         respond checkoutService.all()
     }
     
+    @Secured(['ROLE_ADMIN'])
     def show() {
         respond checkoutService.get(params.id)
     }
 
+    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
     def save() {
         def data = request.JSON
         def method = Checkout.PaymentMethod.valueOf(data.paymentMethod);
-        
+
     	def checkout = new Checkout(data)
 
         if (method == Checkout.PaymentMethod.INVOICE) {

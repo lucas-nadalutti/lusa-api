@@ -28,6 +28,6 @@ class Product {
     }
 
 	Double getPrice() {
-		currentPrice ? currentPrice : fullPrice
+		currentPrice ?: fullPrice
 	}
 }
