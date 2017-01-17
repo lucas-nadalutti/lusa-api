@@ -21,11 +21,11 @@ grails:
     plugin:
         springsecurity:
             providerNames:
-                - lusaAuthProvider
+                - restAuthenticationProvider
             rest:
-                # token.storage.jwt.expiration: 86400
-                token.storage.jwt.expiration: 1
-                login.endpointUrl: "/login"
+                token:
+                    storage.jwt.expiration: 86400
+                login.endpointUrl: "/auth/complete"
 info:
     app:
         name: '@info.app.name@'
@@ -98,6 +98,14 @@ dataSource:
 
 environments:
     development:
+        lusa.cas:
+            uri: "http://wdev/cas"
+            loginEndpoint: "/login"
+            validationEndpoint: "/serviceValidate"
+            logoutEndpoint: "/logout"
+            ticketParam: "ticket"
+            serviceParam: "service"
+            clientRedirectUriParam: "redirectUri"
         dataSource:
             dbCreate: create-drop
             url: jdbc:mysql://localhost/lusa

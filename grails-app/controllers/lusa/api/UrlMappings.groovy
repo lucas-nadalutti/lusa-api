@@ -11,6 +11,9 @@ class UrlMappings {
         put "/$controller/$id(.$format)?"(action:"update")
         patch "/$controller/$id(.$format)?"(action:"patch")
 
+        get "/auth/login(.$format)?"(controller:"auth", action:"login")
+        get "/auth/logout(.$format)?"(controller:"auth", action:"logout")
+        get "/auth/logoutCallback(.$format)?"(controller:"auth", action:"logoutCallback")
         get "/product/available(.$format)?"(controller:"product", action:"available")
 
         "/"(controller: 'application', action:'index')

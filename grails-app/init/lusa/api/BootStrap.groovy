@@ -3,9 +3,10 @@ package lusa.api
 class BootStrap {
 
     def init = { servletContext ->
-    	Role admin = new Role("ROLE_ADMIN").save()
+    	Role userRole = new Role("ROLE_USER").save()
+    	Role adminRole = new Role("ROLE_ADMIN").save()
 		User user = new User("user", "pass").save()
-		UserRole.create(user, admin, true)
+		UserRole.create(user, adminRole)
     }
     def destroy = {
     }

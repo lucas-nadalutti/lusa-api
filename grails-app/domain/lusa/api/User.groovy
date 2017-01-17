@@ -2,18 +2,19 @@ package lusa.api
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import org.springframework.security.core.userdetails.UserDetails
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
-class User implements Serializable {
+class User implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 1
 
-	transient springSecurityService
-	transient userRoleService
+	// transient springSecurityService
 
 	String username
 	String password
+	String email
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -26,31 +27,27 @@ class User implements Serializable {
 	}
 
 	Set<Role> getAuthorities() {
-		return userRoleService.findAllByUser(this)*.role
-	}
-
-	def beforeInsert() {
-		encodePassword()
-	}
-
-	def beforeUpdate() {
-		if (isDirty('password')) {
-			encodePassword()
+		UserRole.withTransaction {
+			return UserRole.findAllByUser(this)*.role
 		}
 	}
 
-	protected void encodePassword() {
-		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+	boolean isCredentialsNonExpired() {
+		!passwordExpired
 	}
 
-	static transients = ['springSecurityService', 'userRoleService']
+	boolean isAccountNonExpired() {
+		!accountExpired
+	}
+
+	boolean isAccountNonLocked() {
+		!accountLocked
+	}
+
+	// static transients = ['springSecurityService']
 
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false
-	}
-
-	static mapping = {
-		password column: '`password`'
+		password nullable: true
 	}
 }
